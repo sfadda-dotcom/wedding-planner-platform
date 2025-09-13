@@ -188,7 +188,7 @@ export function VendorSearch() {
                   <SelectValue placeholder="Select budget" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Any budget</SelectItem>
+                  <SelectItem value="any-budget">Any budget</SelectItem>
                   {BUDGET_RANGES.map((range) => (
                     <SelectItem key={range} value={range}>
                       {range}

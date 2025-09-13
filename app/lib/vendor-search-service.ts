@@ -54,7 +54,8 @@ export class VendorSearchService {
   }
 
   private getCacheKey(params: VendorSearchParams): string {
-    return `${params.category}-${params.location}-${params.budgetRange || 'any'}-${params.radius || 50}`;
+    const budgetKey = params.budgetRange && params.budgetRange !== 'any-budget' ? params.budgetRange : 'any';
+    return `${params.category}-${params.location}-${budgetKey}-${params.radius || 50}`;
   }
 
   private isValidCache(cacheKey: string): boolean {
@@ -393,7 +394,7 @@ export class VendorSearchService {
           messages: [{
             role: 'user',
             content: `Rank these wedding ${params.category} vendors for a couple getting married in ${params.location}. 
-            Budget range: ${params.budgetRange || 'Not specified'}
+            Budget range: ${params.budgetRange && params.budgetRange !== 'any-budget' ? params.budgetRange : 'Not specified'}
             Guest count: ${params.guestCount || 'Not specified'}
             
             Vendors: ${JSON.stringify(vendorSummaries)}
