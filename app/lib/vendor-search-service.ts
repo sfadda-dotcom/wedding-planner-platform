@@ -1,4 +1,5 @@
 
+import { getRealVendorsByCategory, RealVendorData } from './real-vendors-data';
 
 export interface VendorSearchParams {
   category: string;
@@ -106,9 +107,10 @@ export class VendorSearchService {
   }
 
   private async searchGooglePlaces(params: VendorSearchParams): Promise<Vendor[]> {
-    // This would integrate with Google Places API
-    // For now, we'll simulate with enhanced mock data based on real searches
+    // Get real vendors first
+    const realVendors = this.getRealVendorsForCategory(params);
     
+    // Then generate additional simulated vendors to fill the results
     const categoryKeywords = {
       venue: ['wedding venue', 'event hall', 'banquet hall', 'hotel ballroom', 'country club', 'manor house'],
       photographer: ['wedding photographer', 'photography studio', 'wedding photography'],
@@ -120,8 +122,11 @@ export class VendorSearchService {
 
     const keywords = categoryKeywords[params.category as keyof typeof categoryKeywords] || [params.category];
     
-    // Simulate realistic vendor data based on location and category
-    return this.generateRealisticVendors(params, keywords);
+    // Generate additional simulated vendors (but fewer since we have real ones)
+    const simulatedVendors = this.generateRealisticVendors(params, keywords, 5); // Reduced number
+    
+    // Combine real vendors (first) with simulated vendors
+    return [...realVendors, ...simulatedVendors];
   }
 
   private async searchWeddingWebsites(params: VendorSearchParams): Promise<Vendor[]> {
@@ -139,12 +144,54 @@ export class VendorSearchService {
     return this.getSocialMediaVendors(params);
   }
 
-  private generateRealisticVendors(params: VendorSearchParams, keywords: string[]): Vendor[] {
+  private getRealVendorsForCategory(params: VendorSearchParams): Vendor[] {
+    const realVendorsData = getRealVendorsByCategory(params.category);
+    
+    // Convert RealVendorData to Vendor interface and filter by location if needed
+    return realVendorsData
+      .filter(vendor => this.isVendorRelevantToLocation(vendor, params.location))
+      .map(realVendor => this.convertRealVendorToVendor(realVendor));
+  }
+
+  private isVendorRelevantToLocation(vendor: RealVendorData, searchLocation: string): boolean {
+    // For now, show all real vendors regardless of exact location match
+    // In a real system, you might filter by radius/region
+    return true;
+  }
+
+  private convertRealVendorToVendor(realVendor: RealVendorData): Vendor {
+    return {
+      id: realVendor.id,
+      name: realVendor.name,
+      category: realVendor.category,
+      description: realVendor.description,
+      location: realVendor.location,
+      address: realVendor.address,
+      phone: realVendor.phone,
+      website: realVendor.website,
+      email: realVendor.email,
+      rating: realVendor.rating,
+      reviewCount: realVendor.reviewCount,
+      priceRange: realVendor.priceRange,
+      priceIndicator: realVendor.priceIndicator,
+      images: realVendor.images,
+      features: realVendor.features,
+      businessHours: realVendor.businessHours,
+      socialMedia: realVendor.socialMedia,
+      verified: realVendor.verified,
+      specialties: realVendor.specialties,
+      availability: realVendor.availability,
+      responseTime: realVendor.responseTime,
+      languages: realVendor.languages
+    };
+  }
+
+  private generateRealisticVendors(params: VendorSearchParams, keywords: string[], maxCount?: number): Vendor[] {
     const vendors: Vendor[] = [];
     const locations = this.getLocationVariations(params.location);
     
-    // Generate 5-15 realistic vendors per category
-    const vendorCount = Math.floor(Math.random() * 10) + 5;
+    // Generate 5-15 realistic vendors per category, or use maxCount if specified
+    const vendorCount = maxCount || (Math.floor(Math.random() * 10) + 5);
     
     for (let i = 0; i < vendorCount; i++) {
       const vendor = this.createRealisticVendor(params.category, locations, i);
