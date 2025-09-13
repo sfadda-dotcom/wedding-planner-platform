@@ -1,0 +1,209 @@
+
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/wedding_planner_platform/app/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  password      String?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Wedding specific fields
+  partnerOneName   String?
+  partnerTwoName   String?
+  
+  accounts      Account[]
+  sessions      Session[]
+  weddingDetails WeddingDetails?
+  budgets       Budget[]
+  timelines     Timeline[]
+  checklists    Checklist[]
+  
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model WeddingDetails {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  partnerOneName        String
+  partnerTwoName        String
+  weddingLocation       String?
+  weddingDate           DateTime?
+  guestCount            String   // Store as range like "50-100"
+  budget                Decimal?
+  currency              String   @default("GBP")
+  
+  // Cultural and Religious
+  culturalTraditions    String[] // Array of traditions
+  religiousTraditions   String[] // Array of religious preferences
+  plannedEvents         String[] // Array of events
+  
+  // Additional preferences
+  weddingStyle          String?
+  venueType             String?
+  specialRequirements   String?
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model Budget {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name        String
+  totalBudget Decimal
+  currency    String   @default("GBP")
+  items       BudgetItem[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BudgetItem {
+  id          String  @id @default(cuid())
+  budgetId    String
+  budget      Budget  @relation(fields: [budgetId], references: [id], onDelete: Cascade)
+  
+  category    String  // Venue, Photography, Catering, etc.
+  item        String
+  estimatedCost Decimal?
+  actualCost    Decimal?
+  isPaid      Boolean @default(false)
+  notes       String?
+  priority    String  @default("medium") // high, medium, low
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Timeline {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name        String
+  weddingDate DateTime
+  tasks       TimelineTask[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TimelineTask {
+  id          String   @id @default(cuid())
+  timelineId  String
+  timeline    Timeline @relation(fields: [timelineId], references: [id], onDelete: Cascade)
+  
+  title       String
+  description String?
+  dueDate     DateTime
+  isCompleted Boolean  @default(false)
+  category    String   // Planning, Vendors, Admin, etc.
+  priority    String   @default("medium")
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Checklist {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name        String
+  category    String   // General, Venue, Catering, etc.
+  items       ChecklistItem[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ChecklistItem {
+  id          String    @id @default(cuid())
+  checklistId String
+  checklist   Checklist @relation(fields: [checklistId], references: [id], onDelete: Cascade)
+  
+  title       String
+  description String?
+  isCompleted Boolean   @default(false)
+  category    String
+  importance  String    @default("medium") // high, medium, low
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model WeddingTemplate {
+  id          String   @id @default(cuid())
+  type        String   // invitation, vows, speech
+  title       String
+  content     String   @db.Text
+  style       String?  // formal, casual, romantic, etc.
+  category    String?  // save-the-date, invitation, thank-you, etc.
+  tags        String[] // traditional, modern, cultural-specific, etc.
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model VendorCategory {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  icon        String?  // Lucide icon name
+  isActive    Boolean  @default(true)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
