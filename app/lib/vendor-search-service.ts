@@ -147,16 +147,132 @@ export class VendorSearchService {
   private getRealVendorsForCategory(params: VendorSearchParams): Vendor[] {
     const realVendorsData = getRealVendorsByCategory(params.category);
     
-    // Convert RealVendorData to Vendor interface and filter by location if needed
+    // Convert RealVendorData to Vendor interface and apply all filters
     return realVendorsData
       .filter(vendor => this.isVendorRelevantToLocation(vendor, params.location))
+      .filter(vendor => this.isVendorInBudgetRange(vendor, params.budgetRange))
+      .filter(vendor => this.isVendorSuitableForGuestCount(vendor, params.guestCount))
       .map(realVendor => this.convertRealVendorToVendor(realVendor));
   }
 
   private isVendorRelevantToLocation(vendor: RealVendorData, searchLocation: string): boolean {
-    // For now, show all real vendors regardless of exact location match
-    // In a real system, you might filter by radius/region
+    if (!searchLocation) return true;
+    
+    const searchLower = searchLocation.toLowerCase();
+    const vendorLocationLower = vendor.location.toLowerCase();
+    
+    // Check if search location matches or is contained in vendor location
+    return (
+      vendorLocationLower.includes(searchLower) ||
+      searchLower.includes(vendorLocationLower) ||
+      this.areLocationsNearby(searchLower, vendorLocationLower)
+    );
+  }
+
+  private areLocationsNearby(searchLocation: string, vendorLocation: string): boolean {
+    // Define location proximity rules for major cities/regions
+    const locationProximity = {
+      'london': ['central london', 'west london', 'east london', 'north london', 'south london', 'greater london', 'uk', 'england'],
+      'manchester': ['greater manchester', 'northwest england', 'uk', 'england'],
+      'birmingham': ['west midlands', 'midlands', 'uk', 'england'],
+      'edinburgh': ['scotland', 'uk'],
+      'glasgow': ['scotland', 'uk'],
+      'cardiff': ['wales', 'uk'],
+      'bristol': ['southwest england', 'uk', 'england'],
+      'leeds': ['yorkshire', 'northern england', 'uk', 'england'],
+      'liverpool': ['northwest england', 'merseyside', 'uk', 'england'],
+      'newcastle': ['northeast england', 'northumberland', 'uk', 'england']
+    };
+
+    for (const [city, nearby] of Object.entries(locationProximity)) {
+      if (searchLocation.includes(city) && nearby.some(n => vendorLocation.includes(n))) {
+        return true;
+      }
+      if (vendorLocation.includes(city) && nearby.some(n => searchLocation.includes(n))) {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+
+  private isVendorInBudgetRange(vendor: RealVendorData, budgetRange?: string): boolean {
+    if (!budgetRange || budgetRange === 'any-budget') return true;
+    
+    // Convert vendor price range to comparable format
+    const vendorPriceRange = vendor.priceRange.toLowerCase();
+    const searchBudget = budgetRange.toLowerCase();
+    
+    // Extract numeric values for comparison
+    const vendorMin = this.extractMinPrice(vendorPriceRange);
+    const vendorMax = this.extractMaxPrice(vendorPriceRange);
+    const searchMin = this.extractMinPrice(searchBudget);
+    const searchMax = this.extractMaxPrice(searchBudget);
+    
+    // Check if there's any overlap between price ranges
+    return vendorMax >= searchMin && vendorMin <= searchMax;
+  }
+
+  private isVendorSuitableForGuestCount(vendor: RealVendorData, guestCount?: number): boolean {
+    if (!guestCount) return true;
+    
+    // For venues, check capacity suitability
+    if (vendor.category === 'venue') {
+      const features = vendor.features.join(' ').toLowerCase();
+      
+      // Large venues for big weddings
+      if (guestCount > 200 && (
+        features.includes('ballroom') || 
+        features.includes('large capacity') ||
+        features.includes('grand') ||
+        vendor.priceIndicator === '$$$$'
+      )) {
+        return true;
+      }
+      
+      // Medium venues for medium weddings
+      if (guestCount >= 50 && guestCount <= 200 && (
+        features.includes('hall') ||
+        features.includes('reception') ||
+        vendor.priceIndicator === '$$$' ||
+        vendor.priceIndicator === '$$$$'
+      )) {
+        return true;
+      }
+      
+      // Small venues for intimate weddings
+      if (guestCount < 50 && (
+        features.includes('intimate') ||
+        features.includes('private dining') ||
+        vendor.priceIndicator === '$' ||
+        vendor.priceIndicator === '$$'
+      )) {
+        return true;
+      }
+      
+      // Default: all venues are suitable unless clearly specified otherwise
+      return true;
+    }
+    
+    // For other categories, all vendors are suitable
     return true;
+  }
+
+  private extractMinPrice(priceRange: string): number {
+    const match = priceRange.match(/£?(\d+(?:,\d+)?)/);
+    return match ? parseInt(match[1].replace(',', '')) : 0;
+  }
+
+  private extractMaxPrice(priceRange: string): number {
+    const matches = priceRange.match(/£?(\d+(?:,\d+)?)/g);
+    if (matches && matches.length > 1) {
+      return parseInt(matches[1].replace(/[£,]/g, ''));
+    }
+    if (priceRange.includes('over') || priceRange.includes('+')) {
+      return 999999; // Very high number for "over X" ranges
+    }
+    const match = priceRange.match(/£?(\d+(?:,\d+)?)/);
+    return match ? parseInt(match[1].replace(',', '')) * 2 : 999999; // Double the min for single value ranges
   }
 
   private convertRealVendorToVendor(realVendor: RealVendorData): Vendor {
@@ -190,15 +306,55 @@ export class VendorSearchService {
     const vendors: Vendor[] = [];
     const locations = this.getLocationVariations(params.location);
     
-    // Generate 5-15 realistic vendors per category, or use maxCount if specified
-    const vendorCount = maxCount || (Math.floor(Math.random() * 10) + 5);
+    // Generate fewer simulated vendors since we now have real ones
+    const vendorCount = maxCount || Math.min(3, Math.floor(Math.random() * 3) + 1); // 1-3 vendors only
     
     for (let i = 0; i < vendorCount; i++) {
       const vendor = this.createRealisticVendor(params.category, locations, i);
-      vendors.push(vendor);
+      // Apply the same filters to simulated vendors
+      if (this.isSimulatedVendorValid(vendor, params)) {
+        vendors.push(vendor);
+      }
     }
     
     return vendors;
+  }
+
+  private isSimulatedVendorValid(vendor: Vendor, params: VendorSearchParams): boolean {
+    // Apply budget filter
+    if (params.budgetRange && params.budgetRange !== 'any-budget') {
+      const vendorMin = this.extractMinPrice(vendor.priceRange);
+      const vendorMax = this.extractMaxPrice(vendor.priceRange);
+      const searchMin = this.extractMinPrice(params.budgetRange);
+      const searchMax = this.extractMaxPrice(params.budgetRange);
+      
+      if (vendorMax < searchMin || vendorMin > searchMax) {
+        return false;
+      }
+    }
+    
+    // Apply guest count filter for venues
+    if (params.guestCount && vendor.category === 'venue') {
+      const features = vendor.features.join(' ').toLowerCase();
+      
+      if (params.guestCount > 200 && !(
+        features.includes('ballroom') || 
+        features.includes('large') ||
+        vendor.priceIndicator === '$$$$'
+      )) {
+        return false;
+      }
+      
+      if (params.guestCount < 50 && !(
+        features.includes('intimate') ||
+        vendor.priceIndicator === '$' ||
+        vendor.priceIndicator === '$$'
+      )) {
+        return false;
+      }
+    }
+    
+    return true;
   }
 
   private createRealisticVendor(category: string, locations: string[], index: number): Vendor {
@@ -359,18 +515,20 @@ export class VendorSearchService {
   }
 
   private generatePlatformSpecificVendors(params: VendorSearchParams): Vendor[] {
-    // Simulate vendors from wedding platforms with higher quality data
+    // Simulate fewer vendors from wedding platforms since we have real vendors
     const vendors: Vendor[] = [];
-    const count = Math.floor(Math.random() * 5) + 3; // 3-8 vendors
+    const count = Math.floor(Math.random() * 2) + 1; // 1-2 vendors only
     
     for (let i = 0; i < count; i++) {
       const vendor = this.createRealisticVendor(params.category, [params.location], i);
-      // Enhance with platform-specific features
-      vendor.verified = true;
-      vendor.rating = Number((4.5 + Math.random() * 0.5).toFixed(1));
-      vendor.reviewCount = Math.floor(Math.random() * 100) + 50;
-      vendor.responseTime = 'Within 1 hour';
-      vendors.push(vendor);
+      // Apply filters and enhance with platform-specific features
+      if (this.isSimulatedVendorValid(vendor, params)) {
+        vendor.verified = true;
+        vendor.rating = Number((4.5 + Math.random() * 0.5).toFixed(1));
+        vendor.reviewCount = Math.floor(Math.random() * 100) + 50;
+        vendor.responseTime = 'Within 1 hour';
+        vendors.push(vendor);
+      }
     }
     
     return vendors;
@@ -384,18 +542,20 @@ export class VendorSearchService {
 
   private generateSocialMediaEnhancedVendors(params: VendorSearchParams): Vendor[] {
     const vendors: Vendor[] = [];
-    const count = Math.floor(Math.random() * 4) + 2; // 2-6 vendors
+    const count = Math.floor(Math.random() * 2) + 1; // 1-2 vendors only
     
     for (let i = 0; i < count; i++) {
       const vendor = this.createRealisticVendor(params.category, [params.location], i);
-      // Add social media enhancements
-      vendor.socialMedia = {
-        facebook: `https://facebook.com/${vendor.name.replace(/\s+/g, '').toLowerCase()}`,
-        instagram: `https://instagram.com/${vendor.name.replace(/\s+/g, '').toLowerCase()}`,
-        twitter: `https://twitter.com/${vendor.name.replace(/\s+/g, '').toLowerCase()}`
-      };
-      vendor.images = this.generateImageUrls(params.category, 5); // More images from social
-      vendors.push(vendor);
+      // Apply filters and add social media enhancements
+      if (this.isSimulatedVendorValid(vendor, params)) {
+        vendor.socialMedia = {
+          facebook: `https://facebook.com/${vendor.name.replace(/\s+/g, '').toLowerCase()}`,
+          instagram: `https://instagram.com/${vendor.name.replace(/\s+/g, '').toLowerCase()}`,
+          twitter: `https://twitter.com/${vendor.name.replace(/\s+/g, '').toLowerCase()}`
+        };
+        vendor.images = this.generateImageUrls(params.category, 5); // More images from social
+        vendors.push(vendor);
+      }
     }
     
     return vendors;
