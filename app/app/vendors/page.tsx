@@ -68,12 +68,13 @@ export default async function VendorsPage() {
                 </ul>
               </div>
               <div className="bg-white/50 rounded-lg p-4">
-                <h3 className="font-semibold text-blue-800 mb-2">Integration Ready:</h3>
-                <p className="text-sm text-blue-700">
-                  This platform is designed to integrate seamlessly with your n8n workflows 
-                  for automated vendor discovery and comparison. API endpoints are ready 
-                  for your custom automation needs.
-                </p>
+                <h3 className="font-semibold text-blue-800 mb-2">Smart Features:</h3>
+                <ul className="text-sm text-blue-700 space-y-1">
+                  <li>• Intelligent vendor matching</li>
+                  <li>• Budget-aware recommendations</li>
+                  <li>• Multi-source data aggregation</li>
+                  <li>• Instant contact information</li>
+                </ul>
               </div>
             </div>
           </CardContent>
