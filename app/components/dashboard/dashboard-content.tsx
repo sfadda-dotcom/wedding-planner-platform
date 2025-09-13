@@ -22,6 +22,7 @@ import { Badge } from '@/components/ui/badge';
 import { DashboardHeader } from './dashboard-header';
 import { QuickActions } from './quick-actions';
 import { WeddingOverview } from './wedding-overview';
+import { RecommendationsPanel } from '@/components/recommendations/recommendations-panel';
 import Link from 'next/link';
 import { format } from 'date-fns';
 
@@ -77,7 +78,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
     {
       icon: Search,
       title: 'Vendor Discovery',
-      description: 'Find and connect with wedding vendors across the UK',
+      description: 'Find and connect with wedding vendors worldwide',
       href: '/vendors',
       color: 'bg-orange-500',
       progress: 0,
@@ -188,11 +189,21 @@ export function DashboardContent({ user }: DashboardContentProps) {
           </Card>
         </motion.div>
 
-        {/* Main Features Grid */}
+        {/* AI Recommendations */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-8"
+        >
+          <RecommendationsPanel />
+        </motion.div>
+
+        {/* Main Features Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
         >
           {features?.map((feature, index) => (
@@ -244,7 +255,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-8"
           >
             <Card className="wedding-card">

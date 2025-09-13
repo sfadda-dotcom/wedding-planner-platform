@@ -80,7 +80,7 @@ model WeddingDetails {
   weddingDate           DateTime?
   guestCount            String   // Store as range like "50-100"
   budget                Decimal?
-  currency              String   @default("GBP")
+  currency              String   @default("USD")
   
   // Cultural and Religious
   culturalTraditions    String[] // Array of traditions
@@ -103,7 +103,7 @@ model Budget {
   
   name        String
   totalBudget Decimal
-  currency    String   @default("GBP")
+  currency    String   @default("USD")
   items       BudgetItem[]
   
   createdAt   DateTime @default(now())

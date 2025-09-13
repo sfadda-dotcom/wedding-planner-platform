@@ -35,9 +35,16 @@ const GUEST_COUNT_OPTIONS = [
 ];
 
 const CURRENCY_OPTIONS = [
+  { value: 'USD', label: '$ US Dollar' },
   { value: 'GBP', label: '£ British Pound' },
   { value: 'EUR', label: '€ Euro' },
-  { value: 'USD', label: '$ US Dollar' },
+  { value: 'CAD', label: 'C$ Canadian Dollar' },
+  { value: 'AUD', label: 'A$ Australian Dollar' },
+  { value: 'NZD', label: 'NZ$ New Zealand Dollar' },
+  { value: 'CHF', label: 'CHF Swiss Franc' },
+  { value: 'SEK', label: 'SEK Swedish Krona' },
+  { value: 'NOK', label: 'NOK Norwegian Krone' },
+  { value: 'DKK', label: 'DKK Danish Krone' },
 ];
 
 const CULTURAL_TRADITIONS = [
@@ -79,7 +86,7 @@ export default function QuestionnairePage() {
     weddingDate: '',
     guestCount: '',
     budget: '',
-    currency: 'GBP',
+    currency: 'USD',
     culturalTraditions: [] as string[],
     religiousTraditions: [] as string[],
     plannedEvents: [] as string[],
@@ -197,9 +204,12 @@ export default function QuestionnairePage() {
                 <Input
                   value={formData.weddingLocation}
                   onChange={(e) => handleInputChange('weddingLocation', e.target.value)}
-                  placeholder="e.g., London, Manchester, or specific venue"
+                  placeholder="e.g., London, UK; Paris, France; New York, USA; Sydney, Australia"
                   className="h-12"
                 />
+                <p className="text-sm text-gray-500">
+                  Enter city and country, or specific venue location worldwide
+                </p>
               </div>
 
               <div className="space-y-2">
