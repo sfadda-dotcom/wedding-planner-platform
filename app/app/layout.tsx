@@ -17,7 +17,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: 'WeddingPlan AI - Your Intelligent Wedding Planning Assistant',
   description: 'Plan your perfect wedding with AI-powered assistance. Budget templates, timelines, vendor research, and more.',
-  keywords: 'wedding planning, AI wedding planner, UK weddings, wedding budget, wedding timeline',
+  keywords: 'wedding planning, AI wedding planner, global weddings, wedding budget, wedding timeline',
 };
 
 export default function RootLayout({

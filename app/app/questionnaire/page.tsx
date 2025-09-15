@@ -36,7 +36,7 @@ const GUEST_COUNT_OPTIONS = [
 
 const CURRENCY_OPTIONS = [
   { value: 'USD', label: '$ US Dollar' },
-  { value: 'GBP', label: '£ British Pound' },
+  { value: 'GBP', label: '£ Pound Sterling' },
   { value: 'EUR', label: '€ Euro' },
   { value: 'CAD', label: 'C$ Canadian Dollar' },
   { value: 'AUD', label: 'A$ Australian Dollar' },
@@ -204,7 +204,7 @@ export default function QuestionnairePage() {
                 <Input
                   value={formData.weddingLocation}
                   onChange={(e) => handleInputChange('weddingLocation', e.target.value)}
-                  placeholder="e.g., London, UK; Paris, France; New York, USA; Sydney, Australia"
+                  placeholder="e.g., London, England; Paris, France; New York, USA; Sydney, Australia"
                   className="h-12"
                 />
                 <p className="text-sm text-gray-500">

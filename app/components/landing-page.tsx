@@ -28,14 +28,14 @@ export function LandingPage() {
     {
       icon: Users,
       title: 'Vendor Discovery',
-      description: 'Find and connect with trusted wedding vendors across the UK, all in one place.',
+      description: 'Find and connect with trusted wedding vendors worldwide, all in one place.',
     },
   ];
 
   const benefits = [
     'Personalized AI recommendations',
     'Comprehensive budget templates',
-    'UK-focused vendor directory',
+    'Global vendor directory',
     'Timeline and task management',
     'Wedding invitation templates',
     'Vow writing assistance',
@@ -67,7 +67,7 @@ export function LandingPage() {
             
             <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
               Plan your perfect wedding with intelligent assistance. From budgets to vendors, 
-              we help couples across the UK create unforgettable celebrations.
+              we help couples worldwide create unforgettable celebrations.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -85,7 +85,7 @@ export function LandingPage() {
             </div>
             
             <div className="text-sm text-gray-600">
-              🇬🇧 Designed specifically for UK weddings • Free to start • No credit card required
+              💍 Designed for couples worldwide • Free to start • No credit card required
             </div>
           </motion.div>
         </div>
@@ -106,7 +106,7 @@ export function LandingPage() {
               <span className="romantic-text"> Perfect Day</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Our AI-powered platform simplifies wedding planning with intelligent tools and UK-focused resources.
+              Our AI-powered platform simplifies wedding planning with intelligent tools and global resources.
             </p>
           </motion.div>
 
@@ -220,7 +220,7 @@ export function LandingPage() {
               Ready to Plan Your Dream Wedding?
             </h2>
             <p className="text-xl mb-8 text-rose-100 max-w-2xl mx-auto">
-              Join couples across the UK who are planning stress-free, beautiful weddings with AI assistance.
+              Join couples worldwide who are planning stress-free, beautiful weddings with AI assistance.
             </p>
             <Button asChild size="lg" variant="secondary" className="px-8 py-4 text-lg bg-white text-rose-600 hover:bg-rose-50">
               <Link href="/auth/signup">
@@ -240,10 +240,10 @@ export function LandingPage() {
               <h3 className="text-2xl font-display font-bold">WeddingPlan AI</h3>
             </div>
             <p className="text-gray-400 mb-4">
-              Intelligent wedding planning for UK couples
+              Intelligent wedding planning for couples worldwide
             </p>
             <div className="text-sm text-gray-500">
-              © 2024 WeddingPlan AI. Made with love for couples across the UK.
+              © 2024 WeddingPlan AI. Made with love for couples worldwide.
             </div>
           </div>
         </div>

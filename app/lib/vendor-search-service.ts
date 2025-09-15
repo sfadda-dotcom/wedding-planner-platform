@@ -170,18 +170,30 @@ export class VendorSearchService {
   }
 
   private areLocationsNearby(searchLocation: string, vendorLocation: string): boolean {
-    // Define location proximity rules for major cities/regions
+    // Define location proximity rules for major cities/regions globally
     const locationProximity = {
-      'london': ['central london', 'west london', 'east london', 'north london', 'south london', 'greater london', 'uk', 'england'],
-      'manchester': ['greater manchester', 'northwest england', 'uk', 'england'],
-      'birmingham': ['west midlands', 'midlands', 'uk', 'england'],
-      'edinburgh': ['scotland', 'uk'],
-      'glasgow': ['scotland', 'uk'],
-      'cardiff': ['wales', 'uk'],
-      'bristol': ['southwest england', 'uk', 'england'],
-      'leeds': ['yorkshire', 'northern england', 'uk', 'england'],
-      'liverpool': ['northwest england', 'merseyside', 'uk', 'england'],
-      'newcastle': ['northeast england', 'northumberland', 'uk', 'england']
+      // European regions
+      'london': ['central london', 'west london', 'east london', 'north london', 'south london', 'greater london', 'england'],
+      'manchester': ['greater manchester', 'northwest england', 'england'],
+      'birmingham': ['west midlands', 'midlands', 'england'],
+      'edinburgh': ['scotland'],
+      'glasgow': ['scotland'],
+      'cardiff': ['wales'],
+      
+      // US regions
+      'new york': ['nyc', 'manhattan', 'brooklyn', 'queens', 'bronx', 'ny', 'new york city'],
+      'los angeles': ['la', 'hollywood', 'beverly hills', 'santa monica', 'california', 'ca'],
+      'chicago': ['illinois', 'il'],
+      'miami': ['florida', 'fl'],
+      'san francisco': ['sf', 'bay area', 'california', 'ca'],
+      
+      // Other major cities
+      'paris': ['ile-de-france', 'france'],
+      'rome': ['lazio', 'italy'],
+      'barcelona': ['catalonia', 'spain'],
+      'sydney': ['nsw', 'new south wales', 'australia'],
+      'toronto': ['ontario', 'canada'],
+      'vancouver': ['british columbia', 'canada']
     };
 
     for (const [city, nearby] of Object.entries(locationProximity)) {

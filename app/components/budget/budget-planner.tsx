@@ -139,7 +139,7 @@ export function BudgetPlanner({ budget, weddingDetails }: BudgetPlannerProps) {
     }));
 
     setBudgetItems(templateItems);
-    toast.success('Budget template generated based on UK wedding averages!');
+    toast.success('Budget template generated based on global wedding averages!');
   };
 
   return (
