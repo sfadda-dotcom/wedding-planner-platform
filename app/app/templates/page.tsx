@@ -2,6 +2,8 @@
 import { prisma } from '@/lib/db';
 import { TemplatesGallery } from '@/components/templates/templates-gallery';
 
+export const dynamic = 'force-dynamic';
+
 export default async function TemplatesPage() {
   const templates = await prisma.weddingTemplate.findMany({
     orderBy: [
