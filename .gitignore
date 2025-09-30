@@ -1,75 +1,23 @@
-# Dependencies
 **/node_modules
-**/.pnpm
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-
-# Next.js
-.next/
-out/
-.swc/
-**/.build/
-
-# Production
-dist/
-build/
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Debug
+.next
+.cache
+.build
+*.nfs*
+**/.yarn/
+!**/.yarn/patches
+!**/.yarn/plugins
+!**/.yarn/releases
+!**/.yarn/sdks
+!**/.yarn/versions
+!**/.yarn/cache
+**/.yarn/build-state.yml
+**/.yarn/install-state.gz
+dist
+target
+out
+.deploy
+.logs
+*.tsbuildinfo
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
-
-# Local env files
-.env*.local
-
-# Vercel
-.vercel
-
-# TypeScript
-*.tsbuildinfo
-next-env.d.ts
-
-# IDE
-.vscode/
-.idea/
-
-# OS
-.DS_Store
-*.swp
-*.swo
-*~
-
-# Logs
-logs
-*.log
-.logs/
-
-# Database
-*.db
-*.sqlite
-
-# Temporary files
-.tmp/
-.temp/
-
-# Deploy and cache
-.deploy/
-.cache/
-*.nfs*
-
-# Testing
-coverage/
-
-# Misc
-*.tgz
-*.tar.gz
