@@ -1,0 +1,23 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/ai-assistant/page": "app/ai-assistant/page.js",
+  "/api/signup/route": "app/api/signup/route.js",
+  "/api/recommendations/route": "app/api/recommendations/route.js",
+  "/auth/signin/page": "app/auth/signin/page.js",
+  "/api/vendor-search/route": "app/api/vendor-search/route.js",
+  "/auth/signup/page": "app/auth/signup/page.js",
+  "/checklist/page": "app/checklist/page.js",
+  "/page": "app/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/budget/page": "app/budget/page.js",
+  "/timeline/page": "app/timeline/page.js",
+  "/questionnaire/page": "app/questionnaire/page.js",
+  "/templates/page": "app/templates/page.js",
+  "/api/checklist/route": "app/api/checklist/route.js",
+  "/api/ai-assistant/route": "app/api/ai-assistant/route.js",
+  "/api/budget/route": "app/api/budget/route.js",
+  "/api/questionnaire/route": "app/api/questionnaire/route.js",
+  "/api/timeline/route": "app/api/timeline/route.js",
+  "/vendors/page": "app/vendors/page.js"
+}
