@@ -1156,18 +1156,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/cli@npm:^2.20.1":
-  version: 2.20.1
-  resolution: "@prisma/cli@npm:2.20.1"
-  dependencies:
-    "@prisma/engines": "npm:2.20.0-26.60ba6551f29b17d7d6ce479e5733c70d9c00860e"
-  bin:
-    prisma: build/index.js
-    prisma2: build/index.js
-  checksum: 10c0/9b7be74179b4d373b0d37f49cd470302f066764dcb99ca13d9ea37b8a62df013eab4dfcd551b5a7ad09ca0f49380eff070b32f5ed46c2d34993562574c05d2f5
-  languageName: node
-  linkType: hard
-
 "@prisma/client@npm:6.7.0":
   version: 6.7.0
   resolution: "@prisma/client@npm:6.7.0"
@@ -1204,13 +1192,6 @@ __metadata:
   version: 6.7.0-36.3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
   resolution: "@prisma/engines-version@npm:6.7.0-36.3cff47a7f5d65c3ea74883f1d736e41d68ce91ed"
   checksum: 10c0/fd26a4d6c6045d572b5a61dc21f2bc7be94cb2aaeb9d24ea11e47499e9659d369478c93c1224c1c0271976379c694c61ed65edc731b7b06e48ae8c52a9034879
-  languageName: node
-  linkType: hard
-
-"@prisma/engines@npm:2.20.0-26.60ba6551f29b17d7d6ce479e5733c70d9c00860e":
-  version: 2.20.0-26.60ba6551f29b17d7d6ce479e5733c70d9c00860e
-  resolution: "@prisma/engines@npm:2.20.0-26.60ba6551f29b17d7d6ce479e5733c70d9c00860e"
-  checksum: 10c0/763b1c5889d779763bc5a3411ea361b6cf4cb43b727289da189ccaa19806caaaa00dd75446ec18268ad54197c7207d7de976b41a4ca5d00947d4a13116433911
   languageName: node
   linkType: hard
 
@@ -4167,7 +4148,6 @@ __metadata:
     "@hookform/resolvers": "npm:3.9.0"
     "@next-auth/prisma-adapter": "npm:1.0.7"
     "@next/swc-wasm-nodejs": "npm:13.5.1"
-    "@prisma/cli": "npm:^2.20.1"
     "@prisma/client": "npm:6.7.0"
     "@radix-ui/react-accordion": "npm:1.2.0"
     "@radix-ui/react-alert-dialog": "npm:1.1.1"
