@@ -20,14 +20,14 @@ export function QuickActions() {
       icon: Calculator,
       title: 'Budget Calculator',
       description: 'Calculate wedding costs quickly',
-      href: '/budget/calculator',
+      href: '/budget',
       color: 'bg-green-500',
     },
     {
       icon: Clock,
       title: 'Add Task',
       description: 'Add a new planning task',
-      href: '/timeline/new-task',
+      href: '/checklist',
       color: 'bg-blue-500',
     },
     {
@@ -41,14 +41,14 @@ export function QuickActions() {
       icon: Mail,
       title: 'Create Invitation',
       description: 'Design your wedding invites',
-      href: '/templates/invitations',
+      href: '/templates',
       color: 'bg-rose-500',
     },
     {
       icon: FileText,
       title: 'Write Vows',
       description: 'Craft your perfect vows',
-      href: '/templates/vows',
+      href: '/templates',
       color: 'bg-purple-500',
     },
   ];
