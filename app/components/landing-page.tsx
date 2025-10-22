@@ -246,7 +246,7 @@ export function LandingPage() {
             {/* Social Links & Contact */}
             <div className="flex items-center justify-center gap-6 mb-4">
               <a 
-                href="https://instagram.com/nuvisplanner" 
+                href="https://www.instagram.com/nuvisplanner/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 hover:text-green-400 transition-colors"
