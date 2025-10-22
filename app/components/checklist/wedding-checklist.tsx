@@ -24,6 +24,7 @@ import { Progress } from '@/components/ui/progress';
 import { Textarea } from '@/components/ui/textarea';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { DashboardHeader } from '@/components/dashboard/dashboard-header';
+import { Footer } from '@/components/footer';
 import { toast } from 'sonner';
 
 interface WeddingChecklistProps {
@@ -465,6 +466,7 @@ export function WeddingChecklist({ checklists, weddingDetails }: WeddingChecklis
           </div>
         </motion.div>
       </div>
+      <Footer />
     </div>
   );
 }

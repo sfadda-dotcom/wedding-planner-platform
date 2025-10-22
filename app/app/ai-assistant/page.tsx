@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { DashboardHeader } from '@/components/dashboard/dashboard-header';
+import { Footer } from '@/components/footer';
 import { toast } from 'sonner';
 
 export default function AIAssistantPage() {
@@ -275,6 +276,7 @@ export default function AIAssistantPage() {
           </div>
         </motion.div>
       </div>
+      <Footer />
     </div>
   );
 }

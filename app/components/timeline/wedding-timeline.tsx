@@ -24,6 +24,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Textarea } from '@/components/ui/textarea';
 import { DashboardHeader } from '@/components/dashboard/dashboard-header';
+import { Footer } from '@/components/footer';
 import { toast } from 'sonner';
 import { format, addMonths, addWeeks, addDays, isAfter, isBefore } from 'date-fns';
 
@@ -448,6 +449,7 @@ export function WeddingTimeline({ timeline, weddingDetails }: WeddingTimelinePro
           </div>
         </motion.div>
       </div>
+      <Footer />
     </div>
   );
 }

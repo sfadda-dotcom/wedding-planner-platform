@@ -23,6 +23,7 @@ import { DashboardHeader } from './dashboard-header';
 import { QuickActions } from './quick-actions';
 import { WeddingOverview } from './wedding-overview';
 import { RecommendationsPanel } from '@/components/recommendations/recommendations-panel';
+import { Footer } from '@/components/footer';
 import Link from 'next/link';
 import { format } from 'date-fns';
 
@@ -299,6 +300,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
         {/* Quick Actions */}
         <QuickActions />
       </div>
+      <Footer />
     </div>
   );
 }

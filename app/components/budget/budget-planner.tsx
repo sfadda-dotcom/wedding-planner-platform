@@ -21,6 +21,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { DashboardHeader } from '@/components/dashboard/dashboard-header';
+import { Footer } from '@/components/footer';
 import { toast } from 'sonner';
 
 interface BudgetPlannerProps {
@@ -399,6 +400,7 @@ export function BudgetPlanner({ budget, weddingDetails }: BudgetPlannerProps) {
           </div>
         </motion.div>
       </div>
+      <Footer />
     </div>
   );
 }

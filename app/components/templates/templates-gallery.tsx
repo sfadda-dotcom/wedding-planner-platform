@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { DashboardHeader } from '@/components/dashboard/dashboard-header';
+import { Footer } from '@/components/footer';
 import { toast } from 'sonner';
 
 interface TemplatesGalleryProps {
@@ -245,6 +246,7 @@ export function TemplatesGallery({ invitationTemplates, vowTemplates }: Template
           )}
         </motion.div>
       </div>
+      <Footer />
     </div>
   );
 }

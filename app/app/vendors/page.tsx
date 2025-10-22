@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { VendorSearch } from '@/components/vendor-research/vendor-search';
+import { Footer } from '@/components/footer';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Search, Globe } from 'lucide-react';
@@ -83,6 +84,7 @@ export default async function VendorsPage() {
         {/* Vendor Search Component */}
         <VendorSearch />
       </div>
+      <Footer />
     </div>
   );
 }
