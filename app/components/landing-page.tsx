@@ -2,7 +2,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Heart, Sparkles, Calendar, PoundSterling, Users, CheckCircle, Instagram } from 'lucide-react';
+import { Heart, Sparkles, Calendar, DollarSign, Users, CheckCircle, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
@@ -16,7 +16,7 @@ export function LandingPage() {
       description: 'Get personalized recommendations and smart suggestions tailored to your unique wedding vision.',
     },
     {
-      icon: PoundSterling,
+      icon: DollarSign,
       title: 'Budget Management',
       description: 'Track expenses, set budgets, and get cost estimates for all your wedding elements.',
     },
@@ -255,7 +255,7 @@ export function LandingPage() {
                 <span className="text-sm">@nuvisplanner</span>
               </a>
               <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-green-400">
-                <a href="mailto:contact@nuvisplanner.com">
+                <a href="mailto:nuvisplanner@gmail.com">
                   Contact Us
                 </a>
               </Button>

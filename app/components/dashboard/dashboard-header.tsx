@@ -43,7 +43,7 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
       .map(word => word[0])
       .join('')
       .toUpperCase()
-      .slice(0, 2);
+      .slice(0, 3);
   };
 
   return (

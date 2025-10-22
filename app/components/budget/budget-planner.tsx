@@ -4,7 +4,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  PoundSterling, 
   Plus, 
   Trash2, 
   Edit, 
@@ -166,7 +165,9 @@ export function BudgetPlanner({ budget, weddingDetails }: BudgetPlannerProps) {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <Card className="wedding-card">
               <CardContent className="p-6 text-center">
-                <PoundSterling className="h-8 w-8 text-green-500 mx-auto mb-2" />
+                <div className="h-8 w-8 mx-auto mb-2 flex items-center justify-center text-2xl font-bold text-green-500">
+                  {currencySymbol}
+                </div>
                 <p className="text-2xl font-bold text-gray-800">
                   {currencySymbol}{Number(totalBudget || 0).toLocaleString()}
                 </p>
