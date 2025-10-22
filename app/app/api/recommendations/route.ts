@@ -55,6 +55,7 @@ export async function GET(request: NextRequest) {
         location: weddingDetails.weddingLocation,
         guest_count: parseInt(weddingDetails.guestCount?.split('-')[0] || '50'), // Parse guest count range
         budget: Number(weddingDetails.budget) || 0,
+        currency: weddingDetails.currency || 'USD',
         date: weddingDetails.weddingDate?.toISOString() || new Date().toISOString(),
         style: weddingDetails.weddingStyle || '',
         priorities: [] // You might want to add priorities to WeddingDetails model
@@ -72,6 +73,13 @@ export async function GET(request: NextRequest) {
 
 async function generateAIRecommendations(weddingDetails: any): Promise<RecommendationData[]> {
   try {
+    // Get currency symbol
+    const currencyMap: Record<string, string> = {
+      'USD': '$', 'GBP': '£', 'EUR': '€', 'CAD': 'C$', 'AUD': 'A$',
+      'NZD': 'NZ$', 'CHF': 'CHF', 'SEK': 'SEK', 'NOK': 'NOK', 'DKK': 'DKK'
+    };
+    const currencySymbol = currencyMap[weddingDetails.currency] || '$';
+    
     // Create a comprehensive prompt for AI recommendations
     const prompt = `
 You are an expert wedding planner creating personalized recommendations for a couple. Based on their preferences, provide 4-6 specific, actionable recommendations.
@@ -80,12 +88,13 @@ Wedding Details:
 - Location: ${weddingDetails.weddingLocation}
 - Date: ${weddingDetails.weddingDate ? new Date(weddingDetails.weddingDate).toLocaleDateString() : 'Not specified'}
 - Guest Count: ${weddingDetails.guestCount || 'Not specified'}
-- Budget: £${weddingDetails.budget?.toString() || 'Not specified'}
+- Budget: ${currencySymbol}${weddingDetails.budget?.toString() || 'Not specified'} (${weddingDetails.currency || 'USD'})
 - Cultural Traditions: ${weddingDetails.culturalTraditions?.join(', ') || 'None specified'}
 - Religious Traditions: ${weddingDetails.religiousTraditions?.join(', ') || 'None specified'}
 - Planned Events: ${weddingDetails.plannedEvents?.join(', ') || 'Not specified'}
 - Wedding Style: ${weddingDetails.weddingStyle || 'Not specified'}
 - Special Requirements: ${weddingDetails.specialRequirements || 'None specified'}
+- Currency: ${weddingDetails.currency || 'USD'} (use ${currencySymbol} symbol for all cost estimates)
 
 Please provide recommendations in the following JSON format:
 {
@@ -163,6 +172,13 @@ function generateFallbackRecommendations(weddingDetails: any): RecommendationDat
   // Parse guest count from range
   const guestCount = weddingDetails.guestCount ? parseInt(weddingDetails.guestCount.split('-')[0]) : 50;
   const budget = Number(weddingDetails.budget) || 0;
+  
+  // Get currency symbol
+  const currencyMap: Record<string, string> = {
+    'USD': '$', 'GBP': '£', 'EUR': '€', 'CAD': 'C$', 'AUD': 'A$',
+    'NZD': 'NZ$', 'CHF': 'CHF', 'SEK': 'SEK', 'NOK': 'NOK', 'DKK': 'DKK'
+  };
+  const currencySymbol = currencyMap[weddingDetails.currency] || '$';
 
   // Venue recommendation (always high priority)
   recommendations.push({
@@ -177,7 +193,7 @@ function generateFallbackRecommendations(weddingDetails: any): RecommendationDat
       'Ask about availability for your wedding date',
       'Compare pricing packages and what\'s included'
     ],
-    estimated_cost: budget ? `£${Math.round(budget * 0.4).toLocaleString()} - £${Math.round(budget * 0.5).toLocaleString()}` : '£3,000 - £15,000',
+    estimated_cost: budget ? `${currencySymbol}${Math.round(budget * 0.4).toLocaleString()} - ${currencySymbol}${Math.round(budget * 0.5).toLocaleString()}` : `${currencySymbol}3,000 - ${currencySymbol}15,000`,
     timeframe: monthsUntilWedding > 12 ? '12-18 months before wedding' : 'Book immediately'
   });
 
@@ -194,7 +210,7 @@ function generateFallbackRecommendations(weddingDetails: any): RecommendationDat
       'Meet with photographers to ensure personality fit',
       'Compare packages and understand what\'s included'
     ],
-    estimated_cost: budget ? `£${Math.round(budget * 0.1).toLocaleString()} - £${Math.round(budget * 0.15).toLocaleString()}` : '£1,000 - £3,000',
+    estimated_cost: budget ? `${currencySymbol}${Math.round(budget * 0.1).toLocaleString()} - ${currencySymbol}${Math.round(budget * 0.15).toLocaleString()}` : `${currencySymbol}1,000 - ${currencySymbol}3,000`,
     timeframe: monthsUntilWedding > 9 ? '9-12 months before wedding' : 'Book as soon as possible'
   });
 
@@ -204,7 +220,7 @@ function generateFallbackRecommendations(weddingDetails: any): RecommendationDat
       priority: 'medium',
       category: 'planning',
       title: 'Maximize Your Budget with Smart Choices',
-      description: 'With your budget of £' + budget.toLocaleString() + ', focus on the elements that matter most to you and find creative ways to save on others.',
+      description: 'With your budget of ' + currencySymbol + budget.toLocaleString() + ', focus on the elements that matter most to you and find creative ways to save on others.',
       reasoning: 'Strategic planning can help you achieve your dream wedding within your budget constraints.',
       actionable_steps: [
         'Prioritize your top 3 most important wedding elements',

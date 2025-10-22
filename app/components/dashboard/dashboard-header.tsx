@@ -52,9 +52,9 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/dashboard" className="flex items-center space-x-2">
-            <Heart className="h-8 w-8 text-rose-500" />
+            <Heart className="h-8 w-8 text-green-600" />
             <span className="text-2xl font-display font-bold romantic-text">
-              WeddingPlan AI
+              Nuvis Planner
             </span>
           </Link>
 
@@ -65,7 +65,7 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
                 key={item?.name}
                 asChild
                 variant="ghost"
-                className="hover:bg-rose-50 hover:text-rose-600"
+                className="hover:bg-green-50 hover:text-green-700"
               >
                 <Link href={item?.href}>
                   {item?.name}
@@ -80,7 +80,7 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                   <Avatar className="h-10 w-10">
-                    <AvatarFallback className="bg-rose-100 text-rose-600">
+                    <AvatarFallback className="bg-green-100 text-green-700">
                       {getInitials(user?.name)}
                     </AvatarFallback>
                   </Avatar>
@@ -138,7 +138,7 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
                   key={item?.name}
                   asChild
                   variant="ghost"
-                  className="justify-start hover:bg-rose-50 hover:text-rose-600"
+                  className="justify-start hover:bg-green-50 hover:text-green-700"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <Link href={item?.href}>

@@ -2,7 +2,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Heart, Sparkles, Calendar, PoundSterling, Users, CheckCircle } from 'lucide-react';
+import { Heart, Sparkles, Calendar, PoundSterling, Users, CheckCircle, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
@@ -46,9 +46,9 @@ export function LandingPage() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center wedding-gradient overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-pink-400 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute top-40 right-32 w-24 h-24 bg-purple-400 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute bottom-32 left-1/3 w-28 h-28 bg-rose-400 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
+          <div className="absolute top-20 left-20 w-32 h-32 bg-green-400 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute top-40 right-32 w-24 h-24 bg-emerald-400 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute bottom-32 left-1/3 w-28 h-28 bg-green-500 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
@@ -59,9 +59,9 @@ export function LandingPage() {
             className="max-w-4xl mx-auto"
           >
             <div className="flex items-center justify-center mb-6">
-              <Heart className="h-12 w-12 text-rose-500 mr-4" />
+              <Heart className="h-12 w-12 text-green-600 mr-4" />
               <h1 className="text-5xl md:text-7xl font-display font-bold romantic-text">
-                WeddingPlan AI
+                Nuvis Planner
               </h1>
             </div>
             
@@ -71,13 +71,13 @@ export function LandingPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Button asChild size="lg" className="rose-gradient text-white px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300">
+              <Button asChild size="lg" className="green-gradient text-white px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300">
                 <Link href="/auth/signup">
                   Start Planning Free <Sparkles className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
               
-              <Button asChild variant="outline" size="lg" className="px-8 py-4 text-lg border-2 border-rose-500 text-rose-600 hover:bg-rose-50">
+              <Button asChild variant="outline" size="lg" className="px-8 py-4 text-lg border-2 border-green-600 text-green-700 hover:bg-green-50">
                 <Link href="/auth/signin">
                   Sign In
                 </Link>
@@ -119,9 +119,9 @@ export function LandingPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="wedding-card h-full hover:border-rose-200">
+                <Card className="wedding-card h-full hover:border-green-200">
                   <CardHeader className="text-center pb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-rose-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                       <feature.icon className="h-8 w-8 text-white" />
                     </div>
                     <CardTitle className="text-xl font-display">{feature.title}</CardTitle>
@@ -150,7 +150,7 @@ export function LandingPage() {
               className="text-center mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-4">
-                Why Couples Choose <span className="romantic-text">WeddingPlan AI</span>
+                Why Couples Choose <span className="romantic-text">Nuvis Planner</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 Join thousands of couples who've planned their dream weddings with our intelligent platform.
@@ -184,7 +184,7 @@ export function LandingPage() {
               >
                 <div className="bg-white/60 backdrop-blur-sm p-8 rounded-2xl shadow-2xl">
                   <div className="text-center">
-                    <div className="w-20 h-20 bg-gradient-to-br from-rose-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <div className="w-20 h-20 bg-gradient-to-br from-green-600 to-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
                       <Heart className="h-10 w-10 text-white" />
                     </div>
                     <h3 className="text-2xl font-display font-bold text-gray-800 mb-4">
@@ -193,7 +193,7 @@ export function LandingPage() {
                     <p className="text-gray-600 mb-6">
                       Create your account and begin planning your perfect wedding with AI-powered assistance.
                     </p>
-                    <Button asChild size="lg" className="rose-gradient text-white px-8 py-3">
+                    <Button asChild size="lg" className="green-gradient text-white px-8 py-3">
                       <Link href="/auth/signup">
                         Get Started Free
                       </Link>
@@ -207,7 +207,7 @@ export function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-rose-600 to-pink-600 text-white">
+      <section className="py-20 bg-gradient-to-br from-green-700 to-green-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -219,10 +219,10 @@ export function LandingPage() {
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
               Ready to Plan Your Dream Wedding?
             </h2>
-            <p className="text-xl mb-8 text-rose-100 max-w-2xl mx-auto">
+            <p className="text-xl mb-8 text-green-100 max-w-2xl mx-auto">
               Join couples worldwide who are planning stress-free, beautiful weddings with AI assistance.
             </p>
-            <Button asChild size="lg" variant="secondary" className="px-8 py-4 text-lg bg-white text-rose-600 hover:bg-rose-50">
+            <Button asChild size="lg" variant="secondary" className="px-8 py-4 text-lg bg-white text-green-700 hover:bg-green-50">
               <Link href="/auth/signup">
                 Start Planning Today <Heart className="ml-2 h-5 w-5" />
               </Link>
@@ -236,14 +236,33 @@ export function LandingPage() {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="flex items-center justify-center mb-4">
-              <Heart className="h-8 w-8 text-rose-400 mr-2" />
-              <h3 className="text-2xl font-display font-bold">WeddingPlan AI</h3>
+              <Heart className="h-8 w-8 text-green-400 mr-2" />
+              <h3 className="text-2xl font-display font-bold">Nuvis Planner</h3>
             </div>
             <p className="text-gray-400 mb-4">
               Intelligent wedding planning for couples worldwide
             </p>
+            
+            {/* Social Links & Contact */}
+            <div className="flex items-center justify-center gap-6 mb-4">
+              <a 
+                href="https://instagram.com/nuvisplanner" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-400 hover:text-green-400 transition-colors"
+              >
+                <Instagram className="h-5 w-5" />
+                <span className="text-sm">@nuvisplanner</span>
+              </a>
+              <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-green-400">
+                <a href="mailto:contact@nuvisplanner.com">
+                  Contact Us
+                </a>
+              </Button>
+            </div>
+            
             <div className="text-sm text-gray-500">
-              © 2024 WeddingPlan AI. Made with love for couples worldwide.
+              © 2024 Nuvis Planner. Made with love for couples worldwide.
             </div>
           </div>
         </div>

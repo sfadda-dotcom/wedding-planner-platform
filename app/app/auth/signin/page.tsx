@@ -60,7 +60,7 @@ export default function SignInPage() {
         <Card className="wedding-card border-0 shadow-2xl">
           <CardHeader className="text-center pb-6">
             <div className="flex items-center justify-center mb-4">
-              <Heart className="h-10 w-10 text-rose-500 mr-2" />
+              <Heart className="h-10 w-10 text-green-600 mr-2" />
               <CardTitle className="text-3xl font-display font-bold romantic-text">
                 Welcome Back
               </CardTitle>
@@ -84,7 +84,7 @@ export default function SignInPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="pl-10 h-12 border-gray-200 focus:border-rose-500 focus:ring-rose-500"
+                    className="pl-10 h-12 border-gray-200 focus:border-green-600 focus:ring-green-600"
                     required
                   />
                 </div>
@@ -102,7 +102,7 @@ export default function SignInPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your password"
-                    className="pl-10 pr-10 h-12 border-gray-200 focus:border-rose-500 focus:ring-rose-500"
+                    className="pl-10 pr-10 h-12 border-gray-200 focus:border-green-600 focus:ring-green-600"
                     required
                   />
                   <button
@@ -115,20 +115,31 @@ export default function SignInPage() {
                 </div>
               </div>
 
-              <Button
-                type="submit"
-                className="w-full h-12 rose-gradient text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                disabled={isLoading}
-              >
-                {isLoading ? 'Signing In...' : 'Sign In'}
-              </Button>
+              <div className="space-y-4">
+                <Button
+                  type="submit"
+                  className="w-full h-12 green-gradient text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Signing In...' : 'Sign In'}
+                </Button>
+
+                <div className="text-center">
+                  <Link 
+                    href="/auth/forgot-password" 
+                    className="text-sm text-green-600 hover:text-green-700 font-medium transition-colors"
+                  >
+                    Forgot your password?
+                  </Link>
+                </div>
+              </div>
 
               <div className="text-center pt-4">
                 <p className="text-gray-600">
                   Don't have an account?{' '}
                   <Link 
                     href="/auth/signup" 
-                    className="text-rose-600 hover:text-rose-700 font-semibold transition-colors"
+                    className="text-green-600 hover:text-green-700 font-semibold transition-colors"
                   >
                     Sign up for free
                   </Link>

@@ -12,25 +12,25 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 340 82% 52%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --secondary: 210 40% 98%;
-    --secondary-foreground: 222.2 84% 4.9%;
+    --primary: 132 24% 37%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 132 100% 96%;
+    --secondary-foreground: 132 24% 37%;
     --muted: 210 40% 98%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 98%;
-    --accent-foreground: 222.2 84% 4.9%;
+    --accent: 132 100% 96%;
+    --accent-foreground: 132 24% 37%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 340 82% 52%;
+    --ring: 132 24% 37%;
     --radius: 0.75rem;
-    --chart-1: 12 76% 61%;
+    --chart-1: 132 24% 37%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --chart-5: 132 100% 96%;
   }
 
   .dark {
@@ -40,8 +40,8 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 340 82% 52%;
-    --primary-foreground: 355.7 100% 97.3%;
+    --primary: 132 24% 37%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
@@ -52,12 +52,12 @@
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 340 82% 52%;
-    --chart-1: 220 70% 50%;
+    --ring: 132 24% 37%;
+    --chart-1: 132 24% 37%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --chart-5: 132 100% 96%;
   }
 }
 
@@ -76,11 +76,11 @@
 
 @layer components {
   .wedding-gradient {
-    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 25%, #f3e8ff 50%, #ede9fe 75%, #e0e7ff 100%);
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 25%, #e8ffee 50%, #bbf7d0 75%, #dcfce7 100%);
   }
   
-  .rose-gradient {
-    background: linear-gradient(135deg, #be123c 0%, #e11d48 50%, #f43f5e 100%);
+  .green-gradient {
+    background: linear-gradient(135deg, #4c744c 0%, #5a8a5a 50%, #6b9e6b 100%);
   }
   
   .wedding-card {
@@ -88,7 +88,7 @@
   }
   
   .romantic-text {
-    @apply bg-gradient-to-r from-rose-600 via-pink-500 to-purple-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-green-700 via-green-600 to-green-500 bg-clip-text text-transparent;
   }
 }
 

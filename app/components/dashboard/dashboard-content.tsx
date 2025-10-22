@@ -71,7 +71,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
       title: 'Planning Checklist',
       description: 'Never miss important wedding planning tasks',
       href: '/checklist',
-      color: 'bg-purple-500',
+      color: 'bg-teal-500',
       progress: checklistProgress,
       items: totalChecklistItems,
     },
@@ -80,7 +80,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
       title: 'Vendor Discovery',
       description: 'Find and connect with wedding vendors worldwide',
       href: '/vendors',
-      color: 'bg-orange-500',
+      color: 'bg-emerald-500',
       progress: 0,
       items: 0,
     },
@@ -89,7 +89,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
       title: 'Invitations & Templates',
       description: 'Beautiful wedding invitation and vow templates',
       href: '/templates',
-      color: 'bg-rose-500',
+      color: 'bg-green-500',
       progress: 0,
       items: 0,
     },
@@ -110,7 +110,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
     ?.slice(0, 3) || [];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
       <DashboardHeader user={user} />
       
       <div className="container mx-auto px-4 py-8 max-w-7xl">
@@ -123,16 +123,16 @@ export function DashboardContent({ user }: DashboardContentProps) {
         >
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-4">
-              Welcome back, 
+              Welcome back,{' '}
               <span className="romantic-text">
                 {weddingDetails?.partnerOneName && weddingDetails?.partnerTwoName 
-                  ? ` ${weddingDetails.partnerOneName} & ${weddingDetails.partnerTwoName}`
-                  : ' lovebirds'
+                  ? `${weddingDetails.partnerOneName} & ${weddingDetails.partnerTwoName}`
+                  : 'lovebirds'
                 }!
               </span>
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Your wedding planning journey continues. Let's make your special day perfect together.
+              Your wedding planning journey continues.<br />Let's make your special day perfect together.
             </p>
           </div>
 
@@ -150,7 +150,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
         >
           <Card className="wedding-card">
             <CardContent className="p-6 text-center">
-              <Clock className="h-8 w-8 text-rose-500 mx-auto mb-2" />
+              <Clock className="h-8 w-8 text-green-600 mx-auto mb-2" />
               <p className="text-2xl font-bold text-gray-800">
                 {weddingDetails?.weddingDate 
                   ? Math.max(0, Math.ceil((new Date(weddingDetails.weddingDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
@@ -163,15 +163,15 @@ export function DashboardContent({ user }: DashboardContentProps) {
 
           <Card className="wedding-card">
             <CardContent className="p-6 text-center">
-              <TrendingUp className="h-8 w-8 text-green-500 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-gray-800">{planningProgress}%</p>
+              <TrendingUp className="h-8 w-8 text-emerald-600 mx-auto mb-2" />
+              <p className="text-2xl font-bold text-gray-800">{checklistProgress}%</p>
               <p className="text-sm text-gray-600">Planning Progress</p>
             </CardContent>
           </Card>
 
           <Card className="wedding-card">
             <CardContent className="p-6 text-center">
-              <Users className="h-8 w-8 text-blue-500 mx-auto mb-2" />
+              <Users className="h-8 w-8 text-teal-600 mx-auto mb-2" />
               <p className="text-2xl font-bold text-gray-800">{weddingDetails?.guestCount || '0'}</p>
               <p className="text-sm text-gray-600">Expected Guests</p>
             </CardContent>
@@ -179,7 +179,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
 
           <Card className="wedding-card">
             <CardContent className="p-6 text-center">
-              <PoundSterling className="h-8 w-8 text-purple-500 mx-auto mb-2" />
+              <PoundSterling className="h-8 w-8 text-lime-600 mx-auto mb-2" />
               <p className="text-2xl font-bold text-gray-800">
                 {weddingDetails?.currency === 'GBP' ? '£' : weddingDetails?.currency === 'EUR' ? '€' : '$'}
                 {weddingDetails?.budget ? Number(weddingDetails.budget).toLocaleString() : '0'}
@@ -207,7 +207,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
         >
           {features?.map((feature, index) => (
-            <Card key={feature?.title} className="wedding-card hover:border-rose-200 group">
+            <Card key={feature?.title} className="wedding-card hover:border-green-200 group">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
                   <div className={`w-12 h-12 rounded-lg ${feature?.color} flex items-center justify-center`}>
@@ -219,7 +219,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
                     </Badge>
                   )}
                 </div>
-                <CardTitle className="text-xl font-display group-hover:text-rose-600 transition-colors">
+                <CardTitle className="text-xl font-display group-hover:text-green-700 transition-colors">
                   {feature?.title}
                 </CardTitle>
                 <CardDescription className="text-gray-600">
@@ -239,7 +239,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
                     {feature?.items > 0 && `${feature?.items} items`}
                   </span>
                   
-                  <Button asChild size="sm" variant="outline" className="group-hover:border-rose-500 group-hover:text-rose-600">
+                  <Button asChild size="sm" variant="outline" className="group-hover:border-green-600 group-hover:text-green-700">
                     <Link href={feature?.href}>
                       {feature?.progress > 0 ? 'Continue' : 'Start'}
                     </Link>
@@ -261,7 +261,7 @@ export function DashboardContent({ user }: DashboardContentProps) {
             <Card className="wedding-card">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <Clock className="h-5 w-5 text-rose-500" />
+                  <Clock className="h-5 w-5 text-green-600" />
                   <span>Upcoming Tasks</span>
                 </CardTitle>
                 <CardDescription>
